@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RecycLoop - Eco Dark Mode (Prac 15)</title>
+    <style>
+        /* Theme 1: Eco Light (Default) */
+        :root {
+            --bg: #f4f9f4;
+            --card: #ffffff;
+            --text: #1b4332;
+            --accent: #2d6a4f;
+            --border: #95d5b2;
+        }
+
+        /* Theme 2: OLED Eco Dark */
+        body.dark-theme {
+            --bg: #081c15;
+            --card: #1b4332;
+            --text: #d8f3dc;
+            --accent: #52b788;
+            --border: #40916c;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.3s ease;
+            padding: 40px;
+        }
+
+        .panel {
+            max-width: 650px;
+            margin: auto;
+            background-color: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 30px;
+        }
+
+        button {
+            padding: 10px 18px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--accent);
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="panel">
+    <h1>♻ RecycLoop Low-Energy Theme Switcher</h1>
+    <p id="themeStatus">Active Theme: Detecting system preference...</p>
+
+    <button onclick="setLightMode()">☀ Eco Light Mode</button>
+    <button onclick="setDarkMode()">🌙 OLED Dark Mode</button>
+
+    <hr style="border-color: var(--border); margin: 20px 0;">
+    <p>Switching to OLED Dark Mode reduces display power consumption by up to 40% while tracking your circular recycling pickups.</p>
+</div>
+
+<script>
+    function setDarkMode() {
+        document.body.classList.add("dark-theme");
+        document.getElementById("themeStatus").innerText = "Active Theme: OLED Dark Mode";
+    }
+
+    function setLightMode() {
+        document.body.classList.remove("dark-theme");
+        document.getElementById("themeStatus").innerText = "Active Theme: Eco Light Mode";
+    }
+
+    // System preference fallback on initial load
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setDarkMode();
+    } else {
+        setLightMode();
+    }
+</script>
+</body>
+</html>
